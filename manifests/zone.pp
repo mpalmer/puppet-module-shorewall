@@ -61,27 +61,27 @@ define shorewall::zone(
 
 	if $v4 {
 		if $type {
-			$_type = $type
+			$_v4_type = $type
 		} else {
-			$_type = "ipv4"
+			$_v4_type = "ipv4"
 		}
 
 		bitfile::bit { "ipv4 zone ${name}":
 			path    => "/etc/shorewall/zones",
-			content => "${name} ${_type} ${options} ${in_options} ${out_options}";
+			content => "${name} ${_v4_type} ${options} ${in_options} ${out_options}";
 		}
 	}
 
 	if $v6 {
 		if $type {
-			$_type = $type
+			$_v6_type = $type
 		} else {
-			$_type = "ipv6"
+			$_v6_type = "ipv6"
 		}
 
 		bitfile::bit { "ipv6 zone ${name}":
 			path    => "/etc/shorewall6/zones",
-			content => "${name} ${_type} ${options} ${in_options} ${out_options}";
+			content => "${name} ${_v6_type} ${options} ${in_options} ${out_options}";
 		}
 	}
 
