@@ -24,7 +24,7 @@
 #
 #     Whether to define this interface in IPv6.
 #
-define shorewall::_interface(
+define shorewall::underscore_interface(
 		$zone,
 		$options,
 		$v4,

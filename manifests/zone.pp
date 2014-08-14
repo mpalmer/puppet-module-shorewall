@@ -87,7 +87,7 @@ define shorewall::zone(
 
 	$interface_names = keys($interfaces)
 
-	shorewall::_interface { $interface_names:
+	shorewall::underscore_interface { $interface_names:
 		zone    => $name,
 		options => $interfaces,
 		v4      => $v4,

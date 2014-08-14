@@ -15,9 +15,9 @@
 #
 #  * `host` (string; required)
 #
-#     The address (with optional CIDR netmask) which should be matched.  Only
-#     one address can be specified per resource; use multiple resources for
-#     multiple addresses.
+#     The address (with optional CIDR netmask) which should be matched. 
+#     Only one address can be specified per resource; use multiple resources
+#     for multiple addresses.
 #
 #  * `options` (string; optional; default `undef`)
 #
@@ -29,7 +29,7 @@ define shorewall::host(
 		$host,
 		$options = undef
 ) {
-	is_v4($host) {
+	if is_v4($host) {
 		bitfile::bit { "shorewall::host($name)":
 			path    => "/etc/shorewall/hosts",
 			content => "${zone} ${interface}:${host} ${options}"
