@@ -42,6 +42,7 @@ class shorewall(
 		require   => [ Package["shorewall"],
 		               Noop["shorewall/configured"],
 		             ],
+		subscribe => Noop["shorewall/configured"],
 	}
 
 	if !$v4_only {
@@ -66,6 +67,7 @@ class shorewall(
 			require   => [ Package["shorewall6"],
 			               Noop["shorewall/configured"],
 						    ],
+			subscribe => Noop["shorewall/configured"],
 		}
 	}
 
@@ -75,6 +77,7 @@ class shorewall(
 		group => "root",
 		require => Noop["shorewall/installed"],
 		before  => Noop["shorewall/configured"],
+		notify  => Noop["shorewall/configured"],
 	}
 
 	bitfile { ["/etc/shorewall/hosts",
@@ -84,7 +87,6 @@ class shorewall(
 	           "/etc/shorewall/rules",
 	           "/etc/shorewall/tunnels",
 	           "/etc/shorewall/zones"]:
-		notify => Service["shorewall"],
 	}
 
 	if !$v4_only {
@@ -95,7 +97,6 @@ class shorewall(
 		           "/etc/shorewall6/rules",
 		           "/etc/shorewall6/tunnels",
 		           "/etc/shorewall6/zones"]:
-			notify => Service["shorewall6"],
 		}
 	}
 
