@@ -26,11 +26,12 @@ class shorewall(
 	}
 
 	service { "shorewall":
-		ensure => running,
-		enable => true,
-		require => [ Package["shorewall"],
-		             Noop["shorewall/configured"],
-		           ],
+		ensure    => running,
+		enable    => true,
+		hasstatus => true,
+		require   => [ Package["shorewall"],
+		               Noop["shorewall/configured"],
+		             ],
 	}
 
 	if !$v4_only {
@@ -39,11 +40,12 @@ class shorewall(
 		}
 
 		service { "shorewall6":
-			ensure => running,
-			enable => true,
-			require => [ Package["shorewall6"],
-			             Noop["shorewall/configured"],
-						  ],
+			ensure    => running,
+			enable    => true,
+			hasstatus => true,
+			require   => [ Package["shorewall6"],
+			               Noop["shorewall/configured"],
+						    ],
 		}
 	}
 
