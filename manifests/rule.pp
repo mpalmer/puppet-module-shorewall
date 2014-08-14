@@ -66,7 +66,7 @@ define shorewall::rule(
 		fail "\$ordinal is out of range"
 	}
 
-	if $sport or $dport and !$proto {
+	if $sport != "-" or $dport != "-" and $proto == "-" {
 		fail "You must specify proto if you specify sport or dport"
 	}
 
