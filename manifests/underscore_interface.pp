@@ -35,14 +35,14 @@ define shorewall::underscore_interface(
 	if $v4 {
 		bitfile::bit { "shorewall::_interface($name)":
 			path    => "/etc/shorewall/interfaces",
-			content => "${zone} ${name} detect ${opts}\n";
+			content => "${zone} ${name} detect ${opts}";
 		}
 	}
 
 	if $v6 {
 		bitfile::bit { "shorewall6::_interface($name)":
 			path    => "/etc/shorewall6/interfaces",
-			content => "${zone} ${name} - ${opts}\n";
+			content => "${zone} ${name} - ${opts}";
 		}
 	}
 }

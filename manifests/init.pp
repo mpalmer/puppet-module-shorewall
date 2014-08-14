@@ -80,7 +80,7 @@ class shorewall(
 	# Oh I'm going straight to hell for this one
 	Bitfile::Bit {
 		ordinal => 0,
-		content => "# THIS FILE IS PUPPET MANAGED\n# LOCAL CHANGES WILL BE OVERRIDDEN\n\n",
+		content => "# THIS FILE IS PUPPET MANAGED\n# LOCAL CHANGES WILL BE OVERRIDDEN\n",
 	}
 
 	bitfile::bit {
@@ -104,27 +104,27 @@ class shorewall(
 	bitfile::bit {
 		"SECTION ALL for /etc/shorewall/rules":
 			path => "/etc/shorewall/rules",
-			content => "SECTION ALL\n",
+			content => "SECTION ALL",
 			ordinal => 100;
 		"SECTION ESTABLISHED for /etc/shorewall/rules":
 			path => "/etc/shorewall/rules",
-			content => "SECTION ESTABLISHED\n",
+			content => "SECTION ESTABLISHED",
 			ordinal => 200;
 		"SECTION RELATED for /etc/shorewall/rules":
 			path => "/etc/shorewall/rules",
-			content => "SECTION RELATED\n",
+			content => "SECTION RELATED",
 			ordinal => 300;
 		"SECTION INVALID for /etc/shorewall/rules":
 			path => "/etc/shorewall/rules",
-			content => "SECTION INVALID\n",
+			content => "SECTION INVALID",
 			ordinal => 400;
 		"SECTION UNTRACKED for /etc/shorewall/rules":
 			path => "/etc/shorewall/rules",
-			content => "SECTION UNTRACKED\n",
+			content => "SECTION UNTRACKED",
 			ordinal => 500;
 		"SECTION NEW for /etc/shorewall/rules":
 			path => "/etc/shorewall/rules",
-			content => "SECTION NEW\n",
+			content => "SECTION NEW",
 			ordinal => 600;
 	}
 
@@ -149,27 +149,27 @@ class shorewall(
 		bitfile::bit {
 			"SECTION ALL for /etc/shorewall6/rules":
 				path => "/etc/shorewall6/rules",
-				content => "SECTION ALL\n",
+				content => "SECTION ALL",
 				ordinal => 100;
 			"SECTION ESTABLISHED for /etc/shorewall6/rules":
 				path => "/etc/shorewall6/rules",
-				content => "SECTION ESTABLISHED\n",
+				content => "SECTION ESTABLISHED",
 				ordinal => 200;
 			"SECTION RELATED for /etc/shorewall6/rules":
 				path => "/etc/shorewall6/rules",
-				content => "SECTION RELATED\n",
+				content => "SECTION RELATED",
 				ordinal => 300;
 			"SECTION INVALID for /etc/shorewall6/rules":
 				path => "/etc/shorewall6/rules",
-				content => "SECTION INVALID\n",
+				content => "SECTION INVALID",
 				ordinal => 400;
 			"SECTION UNTRACKED for /etc/shorewall6/rules":
 				path => "/etc/shorewall6/rules",
-				content => "SECTION UNTRACKED\n",
+				content => "SECTION UNTRACKED",
 				ordinal => 500;
 			"SECTION NEW for /etc/shorewall6/rules":
 				path => "/etc/shorewall6/rules",
-				content => "SECTION NEW\n",
+				content => "SECTION NEW",
 				ordinal => 600;
 		}
 	}
