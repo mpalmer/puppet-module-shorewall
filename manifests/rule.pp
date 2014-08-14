@@ -9,7 +9,8 @@
 #
 #     Which "section" of the rules file to place this rule.  Valid values are
 #     `"ALL"`, `"ESTABLISHED"`, `"RELATED"`, `"INVALID"`, `"UNTRACKED"`, and
-#     `"NEW"`.
+#     `"NEW"`.  `"INVALID"` and `"UNTRACKED"` are only available if you are
+#     running Shorewall 4.5.13 or later.
 #
 #  * `ordinal` (integer between 1 and 99; optional; default 50)
 #
@@ -111,19 +112,21 @@ define shorewall::rule(
 
 	$content = "${action} ${source} ${dest} ${proto} ${dport} ${sport} ${origdest}"
 
-	if $v4 {
-		bitfile::bit { "shorewall::rule($name)":
-			path    => "/etc/shorewall/rules",
-			content => $content,
-			ordinal => $_ordinal,
+	if $::shorewall_version >= 40513 or ($section != "INVALID" and $section != "UNTRACKED") {
+		if $v4 {
+			bitfile::bit { "shorewall::rule($name)":
+				path    => "/etc/shorewall/rules",
+				content => $content,
+				ordinal => $_ordinal,
+			}
 		}
-	}
 
-	if $v6 {
-		bitfile::bit { "shorewall6::rule($name)":
-			path    => "/etc/shorewall6/rules",
-			content => $content,
-			ordinal => $_ordinal,
+		if $v6 {
+			bitfile::bit { "shorewall6::rule($name)":
+				path    => "/etc/shorewall6/rules",
+				content => $content,
+				ordinal => $_ordinal,
+			}
 		}
 	}
 }

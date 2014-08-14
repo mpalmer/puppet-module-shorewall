@@ -136,18 +136,23 @@ class shorewall(
 			path => "/etc/shorewall/rules",
 			content => "SECTION RELATED",
 			ordinal => 300;
-		"SECTION INVALID for /etc/shorewall/rules":
-			path => "/etc/shorewall/rules",
-			content => "SECTION INVALID",
-			ordinal => 400;
-		"SECTION UNTRACKED for /etc/shorewall/rules":
-			path => "/etc/shorewall/rules",
-			content => "SECTION UNTRACKED",
-			ordinal => 500;
 		"SECTION NEW for /etc/shorewall/rules":
 			path => "/etc/shorewall/rules",
 			content => "SECTION NEW",
 			ordinal => 600;
+	}
+
+	if $::shorewall_version >= 40513 {
+		bitfile::bit {
+			"SECTION INVALID for /etc/shorewall/rules":
+				path => "/etc/shorewall/rules",
+				content => "SECTION INVALID",
+				ordinal => 400;
+			"SECTION UNTRACKED for /etc/shorewall/rules":
+				path => "/etc/shorewall/rules",
+				content => "SECTION UNTRACKED",
+				ordinal => 500;
+		}
 	}
 
 	if !$v4_only {
@@ -181,18 +186,23 @@ class shorewall(
 				path => "/etc/shorewall6/rules",
 				content => "SECTION RELATED",
 				ordinal => 300;
-			"SECTION INVALID for /etc/shorewall6/rules":
-				path => "/etc/shorewall6/rules",
-				content => "SECTION INVALID",
-				ordinal => 400;
-			"SECTION UNTRACKED for /etc/shorewall6/rules":
-				path => "/etc/shorewall6/rules",
-				content => "SECTION UNTRACKED",
-				ordinal => 500;
 			"SECTION NEW for /etc/shorewall6/rules":
 				path => "/etc/shorewall6/rules",
 				content => "SECTION NEW",
 				ordinal => 600;
+		}
+
+		if $::shorewall_version >= 40513 {
+			bitfile::bit {
+				"SECTION INVALID for /etc/shorewall6/rules":
+					path => "/etc/shorewall6/rules",
+					content => "SECTION INVALID",
+					ordinal => 400;
+				"SECTION UNTRACKED for /etc/shorewall6/rules":
+					path => "/etc/shorewall6/rules",
+					content => "SECTION UNTRACKED",
+					ordinal => 500;
+			}
 		}
 	}
 
