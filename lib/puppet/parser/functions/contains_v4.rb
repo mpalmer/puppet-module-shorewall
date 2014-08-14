@@ -4,6 +4,6 @@ module Puppet::Parser::Functions
 
 		item = args[0]
 		item.is_a?(String) or return false
-		!!(item =~ /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}(/\d{1,2})?/)
+		!!(item =~ %r{\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}(/\d{1,2})?})
 	end
 end

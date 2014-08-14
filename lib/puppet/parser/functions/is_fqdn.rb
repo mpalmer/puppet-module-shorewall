@@ -4,6 +4,6 @@ module Puppet::Parser::Functions
 
 		item = args[0]
 		item.is_a?(String) or return false
-		!!(item =~ /^[a-zA-Z0-9.-]+$/)
+		!!(item =~ %r{^[a-zA-Z0-9.-]+$})
 	end
 end
