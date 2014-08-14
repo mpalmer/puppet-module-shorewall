@@ -25,6 +25,16 @@ class shorewall(
 		before => Noop["shorewall/installed"]
 	}
 
+	file { "/etc/default/shorewall":
+		ensure  => file,
+		content => "# THIS FILE IS PUPPET MANAGED\n\nstartup=1\nINITLOG=/dev/null\nSAFESTOP=1\n",
+		mode    => 0444,
+		owner   => "root",
+		group   => "root",
+		require => Noop["shorewall/installed"],
+		before  => Noop["shorewall/configured"],
+	}
+
 	service { "shorewall":
 		ensure    => running,
 		enable    => true,
@@ -37,6 +47,16 @@ class shorewall(
 	if !$v4_only {
 		package { "shorewall6":
 			before => Noop["shorewall/installed"]
+		}
+
+		file { "/etc/default/shorewall6":
+			ensure  => file,
+			content => "# THIS FILE IS PUPPET MANAGED\n\nstartup=1\nINITLOG=/dev/null\nSAFESTOP=1\n",
+			mode    => 0444,
+			owner   => "root",
+			group   => "root",
+			require => Noop["shorewall/installed"],
+			before  => Noop["shorewall/configured"],
 		}
 
 		service { "shorewall6":
