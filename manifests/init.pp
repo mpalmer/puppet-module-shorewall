@@ -42,7 +42,7 @@ class shorewall(
 			ensure => running,
 			enable => true,
 			require => [ Package["shorewall6"],
-							 Noop["shorewall/configured"],
+			             Noop["shorewall/configured"],
 						  ],
 		}
 	}
@@ -67,12 +67,12 @@ class shorewall(
 
 	if !$v4_only {
 		bitfile { ["/etc/shorewall6/hosts",
-					  "/etc/shorewall6/interfaces",
-					  "/etc/shorewall6/masq",
-					  "/etc/shorewall6/policy",
-					  "/etc/shorewall6/rules",
-					  "/etc/shorewall6/tunnels",
-					  "/etc/shorewall6/zones"]:
+		           "/etc/shorewall6/interfaces",
+		           "/etc/shorewall6/masq",
+		           "/etc/shorewall6/policy",
+		           "/etc/shorewall6/rules",
+		           "/etc/shorewall6/tunnels",
+		           "/etc/shorewall6/zones"]:
 			notify => Service["shorewall6"],
 		}
 	}
