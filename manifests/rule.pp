@@ -53,7 +53,7 @@
 #     Only match traffic destined for the specified port(s).
 #
 define shorewall::rule(
-		$section  = "ALL",
+		$section  = "NEW",
 		$ordinal  = 50,
 		$action,
 		$source,
