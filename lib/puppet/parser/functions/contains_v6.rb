@@ -4,6 +4,8 @@ module Puppet::Parser::Functions
 
 		item = args[0]
 		item.is_a?(String) or return false
+		# Strip off the leading zone identifier
+		item.gsub!(/^[^:]+/, '')
 		!!(item =~ %r{[0-9a-fA-F:]+:[0-9a-fA-F:]+(/\d{1,3})?})
 	end
 end
