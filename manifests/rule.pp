@@ -72,7 +72,7 @@ define shorewall::rule(
 	}
 
 	if (contains_v4($source) or contains_v4($dest)) and (contains_v6($source) or contains_v6($dest)) {
-		fail "You cannot mix IPv4 and IPv6 addresses in the same rule"
+		fail "You cannot mix IPv4 and IPv6 addresses in the same rule (source='${source}', dest='${dest}')"
 	}
 
 	if contains_v4($source) or contains_v4($dest) {
