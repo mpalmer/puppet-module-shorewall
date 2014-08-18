@@ -86,7 +86,7 @@ define shorewall::rule(
 		fail "You must specify proto if you specify sport or dport"
 	}
 
-	if (contains_v4($source) or contains_v4($dest)) and (contains_v6($source) or contains_v6($dest)) {
+	if !$v4_only and !$v6_only and (contains_v4($source) or contains_v4($dest)) and (contains_v6($source) or contains_v6($dest)) {
 		fail "You cannot mix IPv4 and IPv6 addresses in the same rule (source='${source}', dest='${dest}')"
 	}
 
