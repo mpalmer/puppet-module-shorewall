@@ -42,7 +42,7 @@
 #     everything else gets an ordinal of `33`.  This will usually get the
 #     ordering correct, but you may need to occasionally fiddle with this.
 #
-      define shorewall::policy(
+define shorewall::policy(
 		$source,
 		$dest,
 		$policy  = "REJECT",
