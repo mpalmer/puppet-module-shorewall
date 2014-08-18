@@ -52,6 +52,19 @@
 #
 #     Only match traffic destined for the specified port(s).
 #
+#  * `v4_only` (boolean; optional; default `false`)
+#
+#     Specify that this firewall rule is *only* to be defined for IPv4. 
+#     This sort of thing is usually determined heuristically, but there are
+#     some cases where you want to be explicit about it.  Note that setting
+#     this attribute overrides the normal heuristics, so you can end up
+#     assploding shorewall if you (for example) use IPv6 addresses in a rule
+#     marked `v4_only`.  So be careful.
+#
+#  * `v6_only` (boolean; optional; default `false`)
+#
+#     The IPv6 equivalent of `v4_only`.
+#
 define shorewall::rule(
 		$section  = "NEW",
 		$ordinal  = 50,
@@ -62,6 +75,8 @@ define shorewall::rule(
 		$proto    = "-",
 		$sport    = "-",
 		$dport    = "-",
+		$v4_only  = false,
+		$v6_only  = false,
 ) {
 	if $ordinal < 1 or $ordinal > 99 {
 		fail "\$ordinal is out of range"
@@ -75,10 +90,14 @@ define shorewall::rule(
 		fail "You cannot mix IPv4 and IPv6 addresses in the same rule (source='${source}', dest='${dest}')"
 	}
 
-	if contains_v4($source) or contains_v4($dest) {
+	if $v4_only and $v6_only {
+		fail "A rule cannot both be v4_only and v6_only"
+	}
+
+	if $v4_only or contains_v4($source) or contains_v4($dest) {
 		$v4 = true
 		$v6 = false
-	} elsif contains_v6($source) or contains_v6($dest) {
+	} elsif $v6_only or contains_v6($source) or contains_v6($dest) {
 		$v4 = false
 		$v6 = true
 	} else {
