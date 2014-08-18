@@ -224,4 +224,16 @@ class shorewall(
 			content => "fw firewall",
 			ordinal => 1;
 	}
+
+	# Like you know what I want, shorewall...
+	exec {
+		"set IP_FORWARDING=Keep for shorewall":
+			command => "/bin/sed -i 's/^IP_FORWARDING=.*$/IP_FORWARDING=Keep/' /etc/shorewall/shorewall.conf",
+			unless  => "/bin/grep -q '^IP_FORWARDING=Keep$' /etc/shorewall/shorewall.conf",
+			require => Package["shorewall"];
+		"set IP_FORWARDING=Keep for shorewall6":
+			command => "/bin/sed -i 's/^IP_FORWARDING=.*$/IP_FORWARDING=Keep/' /etc/shorewall6/shorewall6.conf",
+			unless  => "/bin/grep -q '^IP_FORWARDING=Keep$' /etc/shorewall6/shorewall6.conf",
+			require => Package["shorewall6"];
+	}
 }
