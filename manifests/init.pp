@@ -230,10 +230,12 @@ class shorewall(
 		"set IP_FORWARDING=Keep for shorewall":
 			command => "/bin/sed -i 's/^IP_FORWARDING=.*$/IP_FORWARDING=Keep/' /etc/shorewall/shorewall.conf",
 			unless  => "/bin/grep -q '^IP_FORWARDING=Keep$' /etc/shorewall/shorewall.conf",
-			require => Package["shorewall"];
+			require => Noop["shorewall/installed"],
+			before  => Noop["shorewall/configured"];
 		"set IP_FORWARDING=Keep for shorewall6":
 			command => "/bin/sed -i 's/^IP_FORWARDING=.*$/IP_FORWARDING=Keep/' /etc/shorewall6/shorewall6.conf",
 			unless  => "/bin/grep -q '^IP_FORWARDING=Keep$' /etc/shorewall6/shorewall6.conf",
-			require => Package["shorewall6"];
+			require => Noop["shorewall/installed"],
+			before  => Noop["shorewall/configured"];
 	}
 }
