@@ -101,19 +101,19 @@ define shorewall::rule(
 	}
 
 	if $ordinal < 1 or $ordinal > 99 {
-		fail "\$ordinal is out of range"
+		fail "\$ordinal is out of range (resource ${name})"
 	}
 
 	if $sport != "-" or $dport != "-" and $proto == "-" {
-		fail "You must specify proto if you specify sport or dport"
+		fail "You must specify proto if you specify sport or dport (resource ${name})"
 	}
 
 	if !$v4_only and !$v6_only and (contains_v4($source) or contains_v4($dest)) and (contains_v6($source) or contains_v6($dest)) {
-		fail "You cannot mix IPv4 and IPv6 addresses in the same rule (source='${source}', dest='${dest}')"
+		fail "You cannot mix IPv4 and IPv6 addresses in the same rule (source='${source}', dest='${dest}') (resource ${name})"
 	}
 
 	if $v4_only and $v6_only {
-		fail "A rule cannot both be v4_only and v6_only"
+		fail "A rule cannot both be v4_only and v6_only (resource ${name})"
 	}
 
 	if $v4_only or contains_v4($source) or contains_v4($dest) {
