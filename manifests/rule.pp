@@ -104,7 +104,7 @@ define shorewall::rule(
 		fail "\$ordinal is out of range (resource ${name})"
 	}
 
-	if $sport != "-" or $dport != "-" and $proto == "-" {
+	if ($sport != "-" or $dport != "-") and $proto == "-" {
 		fail "You must specify proto if you specify sport or dport (resource ${name})"
 	}
 
