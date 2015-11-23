@@ -21,6 +21,11 @@
 #     `"NFQUEUE[:<queuenumber>]"`, `"CONTINUE"`, or `"NONE"`.  The meaning of each of these
 #     values is defined in http://www.shorewall.net/manpages/shorewall-policy.html.
 #
+#  * `reciprocal` (boolean; optional; default `false`)
+#
+#     Whether or not to make this policy bi-directional.  If set, a second policy resource
+#     will be created which swaps the `source`/`dest` and applies the same `policy` value.
+#
 #  * `log` (string; optional; default `undef`)
 #
 #     If defined, then a log level will be defined for traffic which matches
@@ -45,10 +50,21 @@
 define shorewall::policy(
 		$source,
 		$dest,
-		$policy  = "REJECT",
-		$log     = undef,
-		$ordinal = undef,
+		$policy     = "REJECT",
+		$reciprocal = false,
+		$log        = undef,
+		$ordinal    = undef,
 ) {
+	if $reciprocal {
+		shorewall::policy { "${name} -- reciprocal":
+			source  => $dest,
+			dest    => $source,
+			policy  => $policy,
+			log     => $log,
+			ordinal => $ordinal,
+		}
+	}
+
 	if $ordinal == undef {
 		if $source == "all" and $dest == "all" {
 			$_ordinal = 99

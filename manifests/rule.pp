@@ -65,19 +65,41 @@
 #
 #     The IPv6 equivalent of `v4_only`.
 #
+#  * `reciprocal` (boolean; optional; default `false`)
+#
+#     If set to `true`, then a second `shorewall::rule` resource will be
+#     created, which mirrors this one, but with all source/dest-related
+#     parameters swapped.
+#
 define shorewall::rule(
-		$section  = "NEW",
-		$ordinal  = 50,
+		$section    = "NEW",
+		$ordinal    = 50,
 		$action,
 		$source,
 		$dest,
-		$origdest = "-",
-		$proto    = "-",
-		$sport    = "-",
-		$dport    = "-",
-		$v4_only  = false,
-		$v6_only  = false,
+		$origdest   = "-",
+		$proto      = "-",
+		$sport      = "-",
+		$dport      = "-",
+		$v4_only    = false,
+		$v6_only    = false,
+		$reciprocal = false,
 ) {
+	if $reciprocal {
+		shorewall::rule { "${name} -- reciprocal":
+			section => $section,
+			ordinal => $ordinal,
+			action  => $action,
+			source  => $dest,
+			dest    => $source,
+			proto   => $proto,
+			sport   => $dport,
+			dport   => $sport,
+			v4_only => $v4_only,
+			v6_only => $v6_only,
+		}
+	}
+
 	if $ordinal < 1 or $ordinal > 99 {
 		fail "\$ordinal is out of range"
 	}
