@@ -1,5 +1,5 @@
 if [ -f /etc/shorewall/docker_rules ]; then
-	iptables-restore -T nat -n </etc/shorewall/docker_rules
+	iptables-restore -n </etc/shorewall/docker_rules
 
 	run_iptables -t nat -I PREROUTING -m addrtype --dst-type LOCAL -j DOCKER
 	run_iptables -t nat -I OUTPUT ! -d 127.0.0.0/8 -m addrtype --dst-type LOCAL -j DOCKER
