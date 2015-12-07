@@ -82,6 +82,7 @@ class shorewall(
 
 	bitfile { ["/etc/shorewall/hosts",
 	           "/etc/shorewall/interfaces",
+	           "/etc/shorewall/mangle",
 	           "/etc/shorewall/masq",
 	           "/etc/shorewall/policy",
 	           "/etc/shorewall/rules",
@@ -92,6 +93,7 @@ class shorewall(
 	if !$v4_only {
 		bitfile { ["/etc/shorewall6/hosts",
 		           "/etc/shorewall6/interfaces",
+		           "/etc/shorewall6/mangle",
 		           "/etc/shorewall6/masq",
 		           "/etc/shorewall6/policy",
 		           "/etc/shorewall6/rules",
@@ -111,6 +113,8 @@ class shorewall(
 			path => "/etc/shorewall/hosts";
 		"header for /etc/shorewall/interfaces":
 			path => "/etc/shorewall/interfaces";
+		"header for /etc/shorewall/mangle":
+			path => "/etc/shorewall/mangle";
 		"header for /etc/shorewall/masq":
 			path => "/etc/shorewall/masq";
 		"header for /etc/shorewall/policy":
@@ -162,6 +166,8 @@ class shorewall(
 				path => "/etc/shorewall6/hosts";
 			"header for /etc/shorewall6/interfaces":
 				path => "/etc/shorewall6/interfaces";
+			"header for /etc/shorewall6/mangle":
+				path => "/etc/shorewall6/mangle";
 			"header for /etc/shorewall6/masq":
 				path => "/etc/shorewall6/masq";
 			"header for /etc/shorewall6/policy":
