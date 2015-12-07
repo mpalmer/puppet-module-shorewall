@@ -103,7 +103,7 @@ define shorewall::mangle(
 		bitfile::bit { "shorewall::mangle($name)":
 			path    => "/etc/shorewall/mangle",
 			content => $content,
-			ordinal => $_ordinal,
+			ordinal => $ordinal,
 		}
 	}
 
