@@ -5,7 +5,17 @@
 # part of the public API for this module.
 #
 
-define shorewall::extension_script_scaffold_oneshot() {
+define shorewall::extension_script_scaffold_runner() {
+	file { $name:
+		ensure  => file,
+		content => template("shorewall/etc/shorewall/extension_script"),
+		owner   => "root",
+		group   => "root",
+		mode    => 0550;
+	}
+}
+
+define shorewall::extension_script_scaffold_phase() {
 	file {
 		[
 			"/etc/shorewall/${name}.d",
@@ -17,15 +27,13 @@ define shorewall::extension_script_scaffold_oneshot() {
 			owner   => "root",
 			group   => "root",
 			mode    => 0750;
+	}
+
+	shorewall::extension_script_scaffold_runner {
 		[
 			"/etc/shorewall/${name}",
 			"/etc/shorewall6/${name}",
-		]:
-			ensure => file,
-			source => "puppet:///modules/shorewall/etc/shorewall/extension_script",
-			owner  => "root",
-			group  => "root",
-			mode   => 0550;
+		]: ;
 	}
 }
 
