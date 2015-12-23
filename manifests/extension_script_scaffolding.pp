@@ -32,9 +32,9 @@ define shorewall::extension_script_scaffold_oneshot() {
 class shorewall::extension_script_scaffolding {
 	shorewall::extension_script_scaffold_oneshot {
 		[
-			"clear", "continue", "init", "initdone", "isusable", "maclog",
-			"postcompile", "refresh", "refreshed", "restored", "save",
-			"scfilter", "start", "started", "stop", "stopped", "tcclear"
+			"clear", "continue", "init", "isusable", "maclog", "postcompile",
+			"refresh", "refreshed", "restored", "save", "scfilter", "start",
+			"started", "stop", "stopped", "tcclear"
 		]:
 	}
 }

@@ -40,7 +40,6 @@ define shorewall::extension_script(
 	if $phase != "clear" and
 	   $phase != "continue" and
 	   $phase != "init" and
-	   $phase != "initdone" and
 	   $phase != "isusable" and
 	   $phase != "maclog" and
 		$phase != "postcompile" and
