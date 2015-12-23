@@ -1,0 +1,6 @@
+#!/bin/sh
+
+#      THIS FILE IS AUTOMATICALLY DISTRIBUTED BY PUPPET
+#       ANY LOCAL CHANGES WILL BE OVERWRITTEN
+#
+/bin/run-parts -v $(readlink -f $0).d
