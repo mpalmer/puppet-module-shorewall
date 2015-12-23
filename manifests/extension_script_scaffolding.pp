@@ -38,7 +38,7 @@ define shorewall::extension_script_scaffold_phase() {
 }
 
 class shorewall::extension_script_scaffolding {
-	shorewall::extension_script_scaffold_oneshot {
+	shorewall::extension_script_scaffold_phase {
 		[
 			"clear", "continue", "init", "isusable", "maclog", "postcompile",
 			"refresh", "refreshed", "restored", "save", "scfilter", "start",
