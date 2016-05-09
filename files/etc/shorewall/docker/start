@@ -3,9 +3,5 @@
 if [ -f $VARDIR/docker_rules ]; then
 	$iptables-restore -n <$VARDIR/docker_rules
 
-	$iptables -t nat -I PREROUTING -m addrtype --dst-type LOCAL -j DOCKER
-	$iptables -t nat -I OUTPUT ! -d 127.0.0.0/8 -m addrtype --dst-type LOCAL -j DOCKER
-
 	rm -f $VARDIR/docker_rules
 fi
-

@@ -2,11 +2,10 @@
 
 if $iptables -t nat -L DOCKER >/dev/null 2>&1; then
 	echo '*nat' >$VARDIR/docker_rules
-	$iptables -t nat -S DOCKER      >>$VARDIR/docker_rules
-	$iptables -t nat -S POSTROUTING >>$VARDIR/docker_rules
+	$iptables -t nat -S | grep -i docker >>$VARDIR/docker_rules
 	echo "COMMIT" >>$VARDIR/docker_rules
 
 	echo '*filter' >>$VARDIR/docker_rules
-	$iptables -S DOCKER >>$VARDIR/docker_rules
+	$iptables -t filter -S | grep -i docker >>$VARDIR/docker_rules
 	echo "COMMIT" >>$VARDIR/docker_rules
 fi
