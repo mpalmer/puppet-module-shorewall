@@ -127,6 +127,15 @@ class shorewall(
 			path => "/etc/shorewall/zones";
 	}
 
+	## shorewall 5.0.14+ use /etc/shorewall/snat
+	#ACTION SOURCE DEST PROTO PORT
+	bitfile::bit {
+		"format for /etc/shorewall/masq":
+			path => "/etc/shorewall/masq",
+			content => "#INTERFACE:DEST SOURCE ADDRESS PROTO PORT",
+			ordinal => 10;
+	}
+
 	# Grrrrr
 	bitfile::bit {
 		"SECTION ALL for /etc/shorewall/rules":

@@ -31,6 +31,9 @@ define shorewall::masq(
 		$interface,
 		$source  = undef,
 		$address = undef,
+		$proto = undef,
+		$port = undef,
+		$ordinal = 50,
 ) {
 	if $source {
 		$_source = $source
@@ -44,7 +47,7 @@ define shorewall::masq(
 
 	bitfile::bit { "shorewall::masq: ${name}":
 		path    => "/etc/shorewall/masq",
-		content => "${interface} ${_source} ${address}",
+		content => "${interface} ${_source} ${address} ${proto} ${port}",
 		ordinal => $ordinal,
 	}
 }
