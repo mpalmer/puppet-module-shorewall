@@ -102,6 +102,12 @@ class shorewall(
 		}
 	}
 
+	if $::shorewall_version >= 50000 {
+		$section = "?SECTION"
+	} else {
+		$section = "SECTION"
+	}
+
 	# Oh I'm going straight to hell for this one
 	Bitfile::Bit {
 		ordinal => 0,
@@ -140,19 +146,19 @@ class shorewall(
 	bitfile::bit {
 		"SECTION ALL for /etc/shorewall/rules":
 			path => "/etc/shorewall/rules",
-			content => "SECTION ALL",
+			content => "${section} ALL",
 			ordinal => 100;
 		"SECTION ESTABLISHED for /etc/shorewall/rules":
 			path => "/etc/shorewall/rules",
-			content => "SECTION ESTABLISHED",
+			content => "${section} ESTABLISHED",
 			ordinal => 200;
 		"SECTION RELATED for /etc/shorewall/rules":
 			path => "/etc/shorewall/rules",
-			content => "SECTION RELATED",
+			content => "${section} RELATED",
 			ordinal => 300;
 		"SECTION NEW for /etc/shorewall/rules":
 			path => "/etc/shorewall/rules",
-			content => "SECTION NEW",
+			content => "${section} NEW",
 			ordinal => 600;
 	}
 
@@ -160,11 +166,11 @@ class shorewall(
 		bitfile::bit {
 			"SECTION INVALID for /etc/shorewall/rules":
 				path => "/etc/shorewall/rules",
-				content => "SECTION INVALID",
+				content => "${section} INVALID",
 				ordinal => 400;
 			"SECTION UNTRACKED for /etc/shorewall/rules":
 				path => "/etc/shorewall/rules",
-				content => "SECTION UNTRACKED",
+				content => "${section} UNTRACKED",
 				ordinal => 500;
 		}
 	}
@@ -192,19 +198,19 @@ class shorewall(
 		bitfile::bit {
 			"SECTION ALL for /etc/shorewall6/rules":
 				path => "/etc/shorewall6/rules",
-				content => "SECTION ALL",
+				content => "${section} ALL",
 				ordinal => 100;
 			"SECTION ESTABLISHED for /etc/shorewall6/rules":
 				path => "/etc/shorewall6/rules",
-				content => "SECTION ESTABLISHED",
+				content => "${section} ESTABLISHED",
 				ordinal => 200;
 			"SECTION RELATED for /etc/shorewall6/rules":
 				path => "/etc/shorewall6/rules",
-				content => "SECTION RELATED",
+				content => "${section} RELATED",
 				ordinal => 300;
 			"SECTION NEW for /etc/shorewall6/rules":
 				path => "/etc/shorewall6/rules",
-				content => "SECTION NEW",
+				content => "${section} NEW",
 				ordinal => 600;
 		}
 
@@ -212,11 +218,11 @@ class shorewall(
 			bitfile::bit {
 				"SECTION INVALID for /etc/shorewall6/rules":
 					path => "/etc/shorewall6/rules",
-					content => "SECTION INVALID",
+					content => "${section} INVALID",
 					ordinal => 400;
 				"SECTION UNTRACKED for /etc/shorewall6/rules":
 					path => "/etc/shorewall6/rules",
-					content => "SECTION UNTRACKED",
+					content => "${section} UNTRACKED",
 					ordinal => 500;
 			}
 		}
