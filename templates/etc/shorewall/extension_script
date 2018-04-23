@@ -3,4 +3,4 @@
 #      THIS FILE IS AUTOMATICALLY DISTRIBUTED BY PUPPET
 #       ANY LOCAL CHANGES WILL BE OVERWRITTEN
 #
-iptables=$g_tool /bin/run-parts -v <%= @name %>.d
+iptables="$([ -z "$IPTABLES" ] && echo $IP6TABLES || echo $IPTABLES)" /bin/run-parts -v <%= @name %>.d
