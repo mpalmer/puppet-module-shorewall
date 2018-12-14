@@ -28,7 +28,7 @@ class shorewall(
 	file { "/etc/default/shorewall":
 		ensure  => file,
 		content => "# THIS FILE IS PUPPET MANAGED\n\nstartup=1\nINITLOG=/dev/null\nSAFESTOP=1\n",
-		mode    => 0444,
+		mode    => "0444",
 		owner   => "root",
 		group   => "root",
 		require => Noop["shorewall/installed"],
@@ -53,7 +53,7 @@ class shorewall(
 		file { "/etc/default/shorewall6":
 			ensure  => file,
 			content => "# THIS FILE IS PUPPET MANAGED\n\nstartup=1\nINITLOG=/dev/null\nSAFESTOP=1\n",
-			mode    => 0444,
+			mode    => "0444",
 			owner   => "root",
 			group   => "root",
 			require => Noop["shorewall/installed"],
@@ -72,7 +72,7 @@ class shorewall(
 	}
 
 	Bitfile {
-		mode  => 0444,
+		mode  => "0444",
 		owner => "root",
 		group => "root",
 		require => Noop["shorewall/installed"],
@@ -102,7 +102,7 @@ class shorewall(
 		}
 	}
 
-	if $::shorewall_version >= 50000 {
+	if 0 + $::shorewall_version >= 50000 {
 		$section = "?SECTION"
 	} else {
 		$section = "SECTION"
@@ -162,7 +162,7 @@ class shorewall(
 			ordinal => 600;
 	}
 
-	if $::shorewall_version >= 40513 {
+	if 0 + $::shorewall_version >= 40513 {
 		bitfile::bit {
 			"SECTION INVALID for /etc/shorewall/rules":
 				path => "/etc/shorewall/rules",
@@ -214,7 +214,7 @@ class shorewall(
 				ordinal => 600;
 		}
 
-		if $::shorewall_version >= 40513 {
+		if 0 + $::shorewall_version >= 40513 {
 			bitfile::bit {
 				"SECTION INVALID for /etc/shorewall6/rules":
 					path => "/etc/shorewall6/rules",

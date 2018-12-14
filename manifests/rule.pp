@@ -153,7 +153,7 @@ define shorewall::rule(
 
 	$content = "${action} ${source} ${dest} ${proto} ${dport} ${sport} ${origdest}"
 
-	if $::shorewall_version >= 40513 or ($section != "INVALID" and $section != "UNTRACKED") {
+	if 0 + $::shorewall_version >= 40513 or ($section != "INVALID" and $section != "UNTRACKED") {
 		if $v4 {
 			bitfile::bit { "shorewall::rule($name)":
 				path    => "/etc/shorewall/rules",

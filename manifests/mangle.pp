@@ -66,7 +66,7 @@ define shorewall::mangle(
 		$v4_only    = false,
 		$v6_only    = false,
 ) {
-	if $::shorewall_version < 40600 {
+	if 0 + $::shorewall_version < 40600 {
 		fail "shorewall::mangle only supported on Shorewall v4.6.0 or later"
 	}
 

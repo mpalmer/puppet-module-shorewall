@@ -11,7 +11,7 @@ define shorewall::extension_script_scaffold_runner() {
 		content => template("shorewall/etc/shorewall/extension_script"),
 		owner   => "root",
 		group   => "root",
-		mode    => 0550,
+		mode    => "0550",
 		require => Noop["shorewall/installed"],
 		before  => Noop["shorewall/configured"];
 	}
@@ -28,7 +28,7 @@ define shorewall::extension_script_scaffold_phase() {
 			recurse => true,
 			owner   => "root",
 			group   => "root",
-			mode    => 0750,
+			mode    => "0750",
 			require => Noop["shorewall/installed"],
 			before  => Noop["shorewall/configured"];
 	}

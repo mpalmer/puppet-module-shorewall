@@ -70,6 +70,6 @@ define shorewall::extension_script(
 			content => $content,
 			owner   => "root",
 			group   => "root",
-			mode    => 0550,
+			mode    => "0550",
 	}
 }
