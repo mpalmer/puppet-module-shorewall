@@ -232,7 +232,6 @@ class shorewall(
 		source => "all",
 		dest   => "all",
 		policy => "REJECT",
-		log    => "info",
 	}
 
 	bitfile::bit {
