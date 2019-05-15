@@ -83,7 +83,6 @@ class shorewall(
 	bitfile { ["/etc/shorewall/hosts",
 	           "/etc/shorewall/interfaces",
 	           "/etc/shorewall/mangle",
-	           "/etc/shorewall/masq",
 	           "/etc/shorewall/policy",
 	           "/etc/shorewall/rules",
 	           "/etc/shorewall/tunnels",
@@ -94,7 +93,6 @@ class shorewall(
 		bitfile { ["/etc/shorewall6/hosts",
 		           "/etc/shorewall6/interfaces",
 		           "/etc/shorewall6/mangle",
-		           "/etc/shorewall6/masq",
 		           "/etc/shorewall6/policy",
 		           "/etc/shorewall6/rules",
 		           "/etc/shorewall6/tunnels",
@@ -121,8 +119,6 @@ class shorewall(
 			path => "/etc/shorewall/interfaces";
 		"header for /etc/shorewall/mangle":
 			path => "/etc/shorewall/mangle";
-		"header for /etc/shorewall/masq":
-			path => "/etc/shorewall/masq";
 		"header for /etc/shorewall/policy":
 			path => "/etc/shorewall/policy";
 		"header for /etc/shorewall/rules":
@@ -131,15 +127,6 @@ class shorewall(
 			path => "/etc/shorewall/tunnels";
 		"header for /etc/shorewall/zones":
 			path => "/etc/shorewall/zones";
-	}
-
-	## shorewall 5.0.14+ use /etc/shorewall/snat
-	#ACTION SOURCE DEST PROTO PORT
-	bitfile::bit {
-		"format for /etc/shorewall/masq":
-			path => "/etc/shorewall/masq",
-			content => "#INTERFACE:DEST SOURCE ADDRESS PROTO PORT",
-			ordinal => 10;
 	}
 
 	# Grrrrr
@@ -183,8 +170,6 @@ class shorewall(
 				path => "/etc/shorewall6/interfaces";
 			"header for /etc/shorewall6/mangle":
 				path => "/etc/shorewall6/mangle";
-			"header for /etc/shorewall6/masq":
-				path => "/etc/shorewall6/masq";
 			"header for /etc/shorewall6/policy":
 				path => "/etc/shorewall6/policy";
 			"header for /etc/shorewall6/rules":

@@ -31,10 +31,20 @@ define shorewall::masq(
 		$interface,
 		$source  = undef,
 		$address = undef,
-		$proto = undef,
-		$port = undef,
+		$proto   = undef,
+		$port   = undef,
 		$ordinal = 50,
 ) {
+	if 0 + $::shorewall_version >= 50014 {
+		include shorewall::file::snat
+
+		if $address {
+			fail "Address syntax cannot be converted to newer Shorewall version format.  Please use shorewall::snat instead"
+		}
+	} else {
+		include shorewall::file::masq
+	}
+
 	if $source {
 		$_source = $source
 	} else {
@@ -45,9 +55,17 @@ define shorewall::masq(
 		}
 	}
 
-	bitfile::bit { "shorewall::masq: ${name}":
-		path    => "/etc/shorewall/masq",
-		content => "${interface} ${_source} ${address} ${proto} ${port}",
-		ordinal => $ordinal,
+	if 0 + $::shorewall_version >= 50014 {
+		bitfile::bit { "shorewall::masq(SNAT): ${name}":
+			path    => "/etc/shorewall/snat",
+			content => "MASQUERADE ${_source} ${interface} ${proto} ${port}",
+			ordinal => $ordinal,
+		}
+	} else {
+		bitfile::bit { "shorewall::masq: ${name}":
+			path    => "/etc/shorewall/masq",
+			content => "${interface} ${_source} ${address} ${proto} ${port}",
+			ordinal => $ordinal,
+		}
 	}
 }
