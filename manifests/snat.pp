@@ -35,8 +35,6 @@ define shorewall::snat(
 		$port    = undef,
 		$ordinal = 50,
 ) {
-	include shorewall::file::snat
-
 	bitfile::bit { "shorewall::masq(SNAT): ${name}":
 		path    => "/etc/shorewall/snat",
 		content => "${action} ${source} ${dest} ${proto} ${port}",

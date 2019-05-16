@@ -106,6 +106,17 @@ class shorewall(
 		$section = "SECTION"
 	}
 
+	if 0 + $::shorewall_version >= 50014 {
+		include shorewall::file::snat
+
+		file { "/etc/shorewall/masq":
+			ensure => absent,
+			force  => true,
+		}
+	} else {
+		include shorewall::file::masq
+	}
+
 	# Oh I'm going straight to hell for this one
 	Bitfile::Bit {
 		ordinal => 0,

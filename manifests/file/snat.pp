@@ -1,11 +1,4 @@
 class shorewall::file::snat {
-	if 0 + $::shorewall_version >= 50014 {
-		file { "/etc/shorewall/masq":
-			ensure => absent,
-			force  => true,
-		}
-	}
-
 	bitfile { "/etc/shorewall/snat":
 		owner   => "root",
 		group   => "root",

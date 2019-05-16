@@ -32,17 +32,13 @@ define shorewall::masq(
 		$source  = undef,
 		$address = undef,
 		$proto   = undef,
-		$port   = undef,
+		$port    = undef,
 		$ordinal = 50,
 ) {
 	if 0 + $::shorewall_version >= 50014 {
-		include shorewall::file::snat
-
 		if $address {
 			fail "Address syntax cannot be converted to newer Shorewall version format.  Please use shorewall::snat instead"
 		}
-	} else {
-		include shorewall::file::masq
 	}
 
 	if $source {
